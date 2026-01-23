@@ -1,0 +1,71 @@
+<div class="signal-container">
+    <header class="page-header">
+        <div class="content">
+            <a routerLink="/" class="back-link">← Back to Home</a>
+            <h1>Angular Signals Store</h1>
+            <p class="subtitle">Experience fine-grained reactivity in action</p>
+        </div>
+    </header>
+
+    <div class="store-layout">
+        <!-- Products Section -->
+        <main class="products-section">
+            <h2>Featured Products</h2>
+            <div class="products-grid">
+                @for (p of products; track p.id) {
+                <div class="product-card">
+                    <div class="product-image">{{ p.image }}</div>
+                    <div class="product-info">
+                        <h3>{{ p.name }}</h3>
+                        <p class="price">\${{ p.price }}</p>
+                        <button class="btn-add" (click)="add(p)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                }
+            </div>
+        </main>
+
+        <!-- Cart Section (Sidebar) -->
+        <aside class="cart-panel">
+            <div class="cart-header">
+                <h2>Your Cart 🛒</h2>
+                <span class="badge">{{ totalItems() }} items</span>
+            </div>
+
+            <div class="cart-items">
+                @if (cart().length === 0) {
+                <div class="empty-cart">
+                    <span class="empty-icon">🕸️</span>
+                    <p>Your cart is empty.</p>
+                    <p class="sub">Start adding some tech!</p>
+                </div>
+                } @else {
+                <ul>
+                    @for (item of cart(); track item.id) {
+                    <li class="cart-item">
+                        <span class="item-icon">{{ item.image }}</span>
+                        <div class="item-details">
+                            <span class="item-name">{{ item.name }}</span>
+                            <span class="item-price">\${{ item.price }}</span>
+                        </div>
+                        <button class="btn-remove" (click)="remove(item.id)" title="Remove">✕</button>
+                    </li>
+                    }
+                </ul>
+                }
+            </div>
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Total</span>
+                    <span class="total-price">\${{ totalPrice() }}</span>
+                </div>
+                <button class="btn-clear" [disabled]="cart().length === 0" (click)="clearCart()">
+                    Clear Cart
+                </button>
+            </div>
+        </aside>
+    </div>
+</div>

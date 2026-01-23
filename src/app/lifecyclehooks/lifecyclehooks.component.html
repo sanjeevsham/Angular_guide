@@ -1,0 +1,80 @@
+<div class="container">
+    <header class="page-header">
+        <div class="content">
+            <a routerLink="/" class="back-link">← Back to Home</a>
+            <h1>Angular Lifecycle Hooks</h1>
+            <p class="subtitle">A visual journey through the component lifecycle</p>
+        </div>
+    </header>
+
+    <div class="grid">
+        <!-- Controls Section -->
+        <section class="card controls">
+            <h2>Interact</h2>
+            <div class="control-group">
+                <label>Trigger Change Detection</label>
+                <button (click)="triggerChange()">Increment Counter: {{ counter() }}</button>
+                <p class="hint">Clicking this triggers ngDoCheck, ngAfterContentChecked, and ngAfterViewChecked.</p>
+            </div>
+
+            <div class="control-group">
+                <label>Simulate Input Change</label>
+                <input [(ngModel)]="targetInput" placeholder="Type here...">
+                <p class="hint">Typing here updates the model and triggers checks.</p>
+            </div>
+
+            <div class="control-group">
+                <label>Child Component</label>
+                <button (click)="toggleChild()" [style.background]="showChild ? '#dc3545' : '#28a745'">
+                    {{ showChild ? 'Destroy Child' : 'Create Child' }}
+                </button>
+            </div>
+
+            <!-- Child Component Demo -->
+            <div class="child-wrapper" *ngIf="showChild">
+                <app-lifecycle-child [inputValue]="targetInput" (logEvent)="onChildLog($event)">
+                    <p>I am projected content from the parent! (ng-content)</p>
+                </app-lifecycle-child>
+            </div>
+
+            <div class="control-group" style="margin-top: 2rem;">
+                <button class="clear-btn" (click)="clearLogs()">Clear Logs</button>
+            </div>
+        </section>
+
+        <!-- Visualizer Section -->
+        <section class="card visualizer">
+            <h2>Lifecycle Events Log</h2>
+            <div class="logs-container">
+                @for(log of logs; track log){
+                <div class="log-entry" [ngClass]="{
+                'init': log?.includes('Init'),
+                'check': log?.includes('Check'),
+                'change': log?.includes('Changes'),
+                'destroy': log?.includes('Destroy')
+              }">
+                    {{ log }}
+                </div>
+                }
+                @if(logs.length === 0){
+                <div class="empty-state">
+                    No events yet...
+                </div>
+                }
+            </div>
+        </section>
+    </div>
+
+    <!-- Educational Explanations -->
+    <section class="card explanations">
+        <h2>Understanding the Hooks</h2>
+        <div class="hooks-grid">
+            @for(hooksitem of hooksitems; track hooksitem.id){
+            <div class="hook-item">
+                <h3>{{hooksitem.name}}</h3>
+                <p>{{hooksitem.description}} <em>{{hooksitem.note}}</em></p>
+            </div>
+            }
+        </div>
+    </section>
+</div>

@@ -1,0 +1,48 @@
+<div class="home-container">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo-badge">🅰️ The Ultimate Guide</div>
+            <h1>Master Angular<br><span class="highlight">Concepts & Features</span></h1>
+            <p class="hero-text">
+                Explore interactive examples, visualize lifecycle hooks, and understand reactivity with Signals.
+                Your journey to Angular mastery starts here.
+            </p>
+            <div class="cta-group">
+                <a href="https://angular.dev" target="_blank" class="btn-secondary">Official Docs</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="blob"></div>
+            <div class="card-stack">
+                <div class="stack-card card-1">Component</div>
+                <div class="stack-card card-2">Template</div>
+                <div class="stack-card card-3">Signal</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features">
+        <div class="section-header">
+            <h2>Interactive Modules</h2>
+            <p>Dive into specific topics with hands-on demos.</p>
+        </div>
+
+        <div class="grid">
+            <!-- Card 1: Data Binding -->
+            @for(componentsCardData of componentsCardData; track $index){
+            <a [routerLink]="componentsCardData.path" class="feature-card {{componentsCardData.variant}}">
+                <div class="card-icon">{{componentsCardData.icon}}</div>
+                <div class="card-content">
+                    <h3>{{componentsCardData.title}}</h3>
+                    <p>{{componentsCardData.description}}</p>
+                    <span class="learn-more">Try Examples &rarr;</span>
+                </div>
+                <div class="card-bg-icon">{{componentsCardData.icon}}</div>
+            </a>
+            }
+
+        </div>
+    </section>
+</div>

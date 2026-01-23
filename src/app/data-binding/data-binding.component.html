@@ -1,0 +1,125 @@
+<div class="binding-container">
+    <header class="page-header">
+        <div class="content">
+            <a routerLink="/" class="back-link">← Back to Home</a>
+            <h1>{{ bindingTitle }}</h1>
+            <p class="subtitle">Understanding the Core Communication Mechanisms</p>
+        </div>
+    </header>
+
+    <div class="grid-layout">
+
+        <!-- 1. Interpolation -->
+        <div class="card interpolation">
+            <div class="card-header">
+                <h2>Interpolation</h2>
+                <code class="syntax">{{value}}</code>
+            </div>
+            <div class="card-content">
+                <p>Embed dynamic values into your text.</p>
+                <div class="demo-box">
+                    <p class="dynamic-text">Hello, <strong>{{ username }}</strong>!</p>
+                    <p class="small">Current Time: {{ currentDate | date:'mediumTime' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Property Binding -->
+        <div class="card property">
+            <div class="card-header">
+                <h2>Property Binding</h2>
+                <code class="syntax">[property]="value"</code>
+            </div>
+            <div class="card-content">
+                <p>Control element properties dynamically.</p>
+                <div class="demo-box">
+                    <button [disabled]="isButtonDisabled" class="demo-btn">
+                        {{ isButtonDisabled ? 'I am Disabled 🚫' : 'I am Active ✅' }}
+                    </button>
+                    <div class="controls">
+                        <label>
+                            <input type="checkbox" [checked]="isButtonDisabled" (change)="toggleDisable()">
+                            Disable Button
+                        </label>
+                    </div>
+                    <img [src]="imageUrl" alt="Random" class="demo-img" />
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Event Binding -->
+        <div class="card event">
+            <div class="card-header">
+                <h2>Event Binding</h2>
+                <code class="syntax">(event)="handler()"</code>
+            </div>
+            <div class="card-content">
+                <p>React to user actions.</p>
+                <div class="demo-box">
+                    <button (click)="incrementCounter()" class="action-btn">
+                        Click Me! 👆
+                    </button>
+                    <div class="stats">
+                        <p>Clicks: <span class="badge">{{ counter }}</span></p>
+                        <p>Last Click: {{ lastEventTime }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Two-Way Binding -->
+        <div class="card two-way">
+            <div class="card-header">
+                <h2>Two-Way Binding</h2>
+                <code class="syntax">[(ngModel)]="value"</code>
+            </div>
+            <div class="card-content">
+                <p>Keep data in sync both ways.</p>
+                <div class="demo-box">
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input [(ngModel)]="username" placeholder="Type name..." />
+                    </div>
+                    <div class="input-group">
+                        <label>Favorite Color</label>
+                        <input type="color" [(ngModel)]="favoriteColor" />
+                        <span [style.color]="favoriteColor">{{ favoriteColor }}</span>
+                    </div>
+                    <div class="preview" [style.borderColor]="favoriteColor">
+                        Preview: <strong>{{ username }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 5. Parent-Child Communication -->
+        <div class="card parent-child">
+            <div class="card-header">
+                <h2>Parent-Child</h2>
+                <code class="syntax">&lt;child [input]="val" (output)="fn()"&gt;</code>
+            </div>
+            <div class="card-content">
+                <p>Pass data down (Product) and listen for events up (Add to Cart).</p>
+                <div class="demo-box" [style.borderColor]="cartCount > 0 ? '#10b981' : '#ccc'">
+                    <div class="cart-summary">
+                        <p>🛒 Cart Items: <span class="badge">{{ cartCount }}</span></p>
+                        <p class="small" *ngIf="lastItemAdded">Last added: {{ lastItemAdded }}</p>
+                    </div>
+
+                    <hr style="margin: 1rem 0; opacity: 0.2">
+
+                    <div class="child-wrapper" style="background: rgba(0,0,0,0.03); padding: 1rem; border-radius: 4px;">
+                        <h4 style="margin-top: 0">Featured Product (Child Component):</h4>
+                        <app-data-binding-to-child [productName]="'Smartphone XL'" [price]="999"
+                            (addToCart)="onAddToCart($event)">
+                        </app-data-binding-to-child>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="reset-btn" (click)="reset()">Reset All Demos</button>
+        </div>
+    </div>

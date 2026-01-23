@@ -1,0 +1,22 @@
+.status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.2rem;
+}
+
+strong {
+  color: #dc2626;
+}
+
+strong.active {
+  color: #16a34a;
+}
+
+button {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  border: none;
+  background: #111827;
+  color: white;
+}

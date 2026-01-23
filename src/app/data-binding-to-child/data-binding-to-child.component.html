@@ -1,0 +1,16 @@
+<!-- <h3 class="heading">Parent to child</h3>
+    <div class="innerContent">
+        <div>{{title}}</div>
+    </div>
+<h3 class="heading">Child to Parent</h3>
+    <div class="innerContent">
+        <button (click)="sendToparent()">Click me!</button>
+    </div> -->
+
+<div class="product-card">
+    <div class="product-info">
+        <h3>{{ productName }}</h3>
+        <span class="price">${{ price }}</span>
+    </div>
+    <button (click)="handleAddToCart()">Add to Cart 🛒</button>
+</div>
