@@ -28,5 +28,11 @@ export class HomeComponent {
         icon: '↻',
         path: '/lifecycle-hooks',
         variant: 'lifecycle'
+    }, {
+        title: 'Routing',
+        description: 'Navigate through pages, manage parameters, guards, and nested routes.',
+        icon: '🛣️',
+        path: '/routing',
+        variant: 'routing'
     }]
 }
